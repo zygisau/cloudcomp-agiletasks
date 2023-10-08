@@ -1,6 +1,5 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
-import { Task } from "./entity/Task";
 
 export const AppDataSource = new DataSource({
   type: "mysql",
@@ -10,8 +9,8 @@ export const AppDataSource = new DataSource({
   username: process.env["AZURE_MYSQL_USER"],
   password: process.env["AZURE_MYSQL_PASSWORD"],
   synchronize: true,
-  ssl: true,
-  logging: true,
+  ssl: process.env["NODE_ENV"] !== "development",
+  // logging: true,
   entities: [__dirname + "/entity/**/*{.ts,.js}"],
   migrations: [],
   subscribers: [],
