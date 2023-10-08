@@ -31,19 +31,19 @@ const singleTaskSchema = z.object({
 export type ITask = z.infer<typeof singleTaskSchema>;
 
 export const fetchTasks = async (): Promise<ITask[]> => {
-  const response = await fetch(`${window.location.href}api/tasks`);
+  const response = await fetch(`${window.location.href}tasks`);
   const tasks = await response.json();
   return tasks;
 };
 
 export const fetchTask = async (taskId: string): Promise<ITask> => {
-  const response = await fetch(`${window.location.href}api/tasks/${taskId}`);
+  const response = await fetch(`${window.location.href}tasks/${taskId}`);
   const tasks = await response.json();
   return tasks;
 };
 
 export const submitTask = async (task: ITask): Promise<ITask> => {
-  const response = await fetch(`${window.location.href}api/tasks/new`, {
+  const response = await fetch(`${window.location.href}tasks/new`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
