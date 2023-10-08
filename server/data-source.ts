@@ -10,8 +10,9 @@ export const AppDataSource = new DataSource({
   username: process.env["AZURE_MYSQL_USER"],
   password: process.env["AZURE_MYSQL_PASSWORD"],
   synchronize: true,
-  logging: false,
-  entities: [Task],
+  ssl: true,
+  logging: true,
+  entities: [__dirname + "/entity/**/*{.ts,.js}"],
   migrations: [],
   subscribers: [],
 });
