@@ -7,7 +7,9 @@ var path = require("path");
 //   res.render('index', { title: 'Express' });
 // });
 router.get("/", function (req, res, next) {
-  res.sendFile(path.join(__dirname, "..", "client", "dist", "index.html"));
+  res.sendFile(
+    path.join(__dirname, "..", "..", "client", "dist", "index.html")
+  );
 });
 
 module.exports = router;
