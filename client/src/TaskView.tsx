@@ -1,4 +1,4 @@
-import { Table, TabsContent } from "@radix-ui/themes";
+import { Table } from "@radix-ui/themes";
 import { ITask } from "./api/tasks";
 
 export interface ITaskView {

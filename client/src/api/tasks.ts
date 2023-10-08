@@ -31,7 +31,7 @@ const singleTaskSchema = z.object({
 
 export type ITask = z.infer<typeof singleTaskSchema>;
 
-const tasksSchema = z.array(singleTaskSchema);
+// const tasksSchema = z.array(singleTaskSchema);
 
 // generate with faker
 export const fetchTasks = async (): Promise<ITask[]> => {
