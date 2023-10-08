@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
+import { fetchTasks } from "../api/tasks";
+import NewTaskContainer from "./NewTaskContainer";
 import TaskView from "./TaskView";
-import { fetchTasks } from "./api/tasks";
 
 const TaskContainer = () => {
   const { data, isError, isLoading } = useQuery({
@@ -16,7 +17,12 @@ const TaskContainer = () => {
 
   if (isError) return <div>Something went wrong</div>;
 
-  return <TaskView data={data} handleClick={handleClick} />;
+  return (
+    <>
+      <NewTaskContainer />
+      <TaskView data={data} handleClick={handleClick} />
+    </>
+  );
 };
 
 export default TaskContainer;

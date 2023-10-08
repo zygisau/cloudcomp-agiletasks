@@ -1,4 +1,3 @@
-import { faker } from "@faker-js/faker";
 import z from "zod";
 
 export enum PriorityRaw {
@@ -31,20 +30,26 @@ const singleTaskSchema = z.object({
 
 export type ITask = z.infer<typeof singleTaskSchema>;
 
-// const tasksSchema = z.array(singleTaskSchema);
-
-// generate with faker
 export const fetchTasks = async (): Promise<ITask[]> => {
-  const taskCount = 10;
-  const tasks: ITask[] = [];
-  for (let i = 0; i < taskCount; i++) {
-    tasks.push({
-      id: `TASK-${i}`,
-      title: `${faker.hacker.verb()} ${faker.hacker.adjective()} ${faker.hacker.noun()}.`,
-      status: faker.number.int({ min: 0, max: 7 }) as StatusRaw,
-      priority: faker.number.int({ min: 0, max: 3 }) as PriorityRaw,
-      description: faker.lorem.paragraph(),
-    });
-  }
+  const response = await fetch(`${window.location.href}api/tasks`);
+  const tasks = await response.json();
   return tasks;
+};
+
+export const fetchTask = async (taskId: string): Promise<ITask> => {
+  const response = await fetch(`${window.location.href}api/tasks/${taskId}`);
+  const tasks = await response.json();
+  return tasks;
+};
+
+export const submitTask = async (task: ITask): Promise<ITask> => {
+  const response = await fetch(`${window.location.href}api/tasks/new`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(task),
+  });
+  const newTask = await response.json();
+  return newTask;
 };

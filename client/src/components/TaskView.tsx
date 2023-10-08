@@ -1,5 +1,5 @@
 import { Table } from "@radix-ui/themes";
-import { ITask } from "./api/tasks";
+import { ITask } from "../api/tasks";
 
 export interface ITaskView {
   data: ITask[];
@@ -33,7 +33,7 @@ const TaskView: React.FC<ITaskView> = ({ data, handleClick }) => {
 
       <Table.Body>
         {data.map((task) => (
-          <Table.Row key={task.id}>
+          <Table.Row key={task.id} className="hover:bg-slate-200">
             <Table.RowHeaderCell className="p-0" style={{ padding: 0 }}>
               <a href="#" className="p-3 block" onClick={handleClick}>
                 {task.id}
