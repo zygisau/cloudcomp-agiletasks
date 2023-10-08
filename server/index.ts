@@ -20,4 +20,4 @@ const server = AppDataSource.initialize()
   })
   .catch((error) => console.log(error));
 
-module.exports = Promise.resolve(app());
+module.exports = server;
