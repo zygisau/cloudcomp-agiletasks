@@ -40,8 +40,7 @@ const TaskView: React.FC<ITaskView> = ({ data, handleClick, handleDelete }) => {
           <Table.Row key={task.id} className="hover:bg-slate-200">
             <Table.RowHeaderCell className="p-0" style={{ padding: 0 }}>
               <a
-                href=""
-                className="p-3 block"
+                className="p-3 block cursor-pointer"
                 onClick={() => handleClick(task.id)}
               >
                 {task.id}
@@ -49,8 +48,7 @@ const TaskView: React.FC<ITaskView> = ({ data, handleClick, handleDelete }) => {
             </Table.RowHeaderCell>
             <Table.Cell className="p-0" style={{ padding: 0 }}>
               <a
-                href=""
-                className="p-3 block"
+                className="p-3 block cursor-pointer"
                 onClick={() => handleClick(task.id)}
               >
                 {task.title}
@@ -58,8 +56,7 @@ const TaskView: React.FC<ITaskView> = ({ data, handleClick, handleDelete }) => {
             </Table.Cell>
             <Table.Cell className="p-0" style={{ padding: 0 }}>
               <a
-                href=""
-                className="p-3 block"
+                className="p-3 block cursor-pointer"
                 onClick={() => handleClick(task.id)}
               >
                 {statusMap[task.status]}
@@ -67,8 +64,7 @@ const TaskView: React.FC<ITaskView> = ({ data, handleClick, handleDelete }) => {
             </Table.Cell>
             <Table.Cell className="p-0" style={{ padding: 0 }}>
               <a
-                href=""
-                className="p-3 block"
+                className="p-3 block cursor-pointer"
                 onClick={() => handleClick(task.id)}
               >
                 {priorityMap[task.priority]}

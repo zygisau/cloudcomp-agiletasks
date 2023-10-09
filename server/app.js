@@ -16,7 +16,7 @@ module.exports = () => {
   app.use(express.static(path.join(__dirname, "..", "client", "dist")));
   app.use(express.static(path.join(__dirname, "..", "client", "public")));
 
-  app.use("/", indexRouter);
+  app.use(/^(?!\/tasks($|\/)).*$/, indexRouter);
   app.use("/tasks", tasksRouter);
 
   return app;
