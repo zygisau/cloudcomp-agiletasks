@@ -1,16 +1,36 @@
-import { useQuery } from "@tanstack/react-query";
-import { fetchTasks } from "../api/tasks";
-import NewTaskContainer from "./NewTaskContainer";
+import { Button } from "@radix-ui/themes";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useNavigate, Outlet } from "react-router-dom";
+import { deleteTask, fetchTasks } from "../api/tasks";
 import TaskView from "./TaskView";
 
 const TaskContainer = () => {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const { data, isError, isLoading } = useQuery({
     queryKey: ["tasks"],
     queryFn: fetchTasks,
   });
 
-  const handleClick = () => {
-    console.log("clicked");
+  const { mutate: deleteRow } = useMutation({
+    mutationFn: (id: string) => {
+      return deleteTask(id);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["tasks"]);
+    },
+  });
+
+  const handleNewTask = () => {
+    navigate("/new");
+  };
+
+  const handleItemClick = (id: string) => {
+    navigate(`/${id}`);
+  };
+
+  const handleDelete = (id: string) => {
+    deleteRow(id);
   };
 
   if (isLoading) return <div>Loading...</div>;
@@ -19,8 +39,15 @@ const TaskContainer = () => {
 
   return (
     <>
-      <NewTaskContainer />
-      <TaskView data={data} handleClick={handleClick} />
+      <Button className="w-fit" onClick={handleNewTask}>
+        New Task
+      </Button>
+      <TaskView
+        data={data}
+        handleClick={handleItemClick}
+        handleDelete={handleDelete}
+      />
+      <Outlet />
     </>
   );
 };

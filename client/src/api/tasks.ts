@@ -30,20 +30,22 @@ const singleTaskSchema = z.object({
 
 export type ITask = z.infer<typeof singleTaskSchema>;
 
+const address = window.location.origin;
+
 export const fetchTasks = async (): Promise<ITask[]> => {
-  const response = await fetch(`${window.location.href}tasks`);
+  const response = await fetch(`${address}/tasks`);
   const tasks = await response.json();
   return tasks;
 };
 
 export const fetchTask = async (taskId: string): Promise<ITask> => {
-  const response = await fetch(`${window.location.href}tasks/${taskId}`);
+  const response = await fetch(`${address}/tasks/${taskId}`);
   const tasks = await response.json();
   return tasks;
 };
 
 export const submitTask = async (task: ITask): Promise<ITask> => {
-  const response = await fetch(`${window.location.href}tasks/new`, {
+  const response = await fetch(`${address}/tasks/new`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -52,4 +54,24 @@ export const submitTask = async (task: ITask): Promise<ITask> => {
   });
   const newTask = await response.json();
   return newTask;
+};
+
+export const updateTask = async (task: ITask): Promise<ITask> => {
+  const response = await fetch(`${address}/tasks/${task.id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(task),
+  });
+  const updatedTask = await response.json();
+  return updatedTask;
+};
+
+export const deleteTask = async (taskId: string): Promise<ITask> => {
+  const response = await fetch(`${address}/tasks/${taskId}`, {
+    method: "DELETE",
+  });
+  const deletedTask = await response.json();
+  return deletedTask;
 };

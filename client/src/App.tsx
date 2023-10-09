@@ -1,4 +1,23 @@
+import NewTaskContainer from "./components/NewTaskContainer";
 import TasksContainer from "./components/TasksContainer";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+const routeConfig = createBrowserRouter([
+  {
+    path: "/",
+    Component: TasksContainer,
+    children: [
+      {
+        path: "/new",
+        Component: NewTaskContainer,
+      },
+      {
+        path: "/:id",
+        Component: NewTaskContainer,
+      },
+    ],
+  },
+]);
 
 function App() {
   return (
@@ -12,7 +31,7 @@ function App() {
             </p>
           </div>
         </div>
-        <TasksContainer />
+        <RouterProvider router={routeConfig} />
       </div>
     </>
   );

@@ -73,16 +73,19 @@ export const updateTask = async (req: Request, res: Response) => {
 export const deleteTask = async (req: Request, res: Response) => {
   try {
     // parse id
-    const id = z.number().safeParse(req.params.id);
+    const id = z.coerce.number().safeParse(req.params.taskId);
     if (!id.success) return res.status(400).send(id.error);
 
     // check if the task exists
     const deleteResult = await AppDataSource.manager.delete(Task, {
-      where: { id: id.data },
+      id: id.data,
     });
     if (!deleteResult.affected) return res.status(404).send("Task not found");
 
-    return res.sendStatus(200);
+    return res.send({
+      status: 200,
+      message: "OK",
+    });
   } catch (error) {
     res.status(500).send(error);
     console.error(error);
