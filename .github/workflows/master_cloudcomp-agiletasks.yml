@@ -88,7 +88,7 @@ jobs:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: cloudcomp-agiletasks
-          environment_name: Cloudcomp-agiletasks-env
+          environment_name: e-es2sbnmajf
           version_label: 1
           region: eu-north-1
           deployment_package: release.zip
